@@ -1,0 +1,24 @@
+default: &default
+  adapter: postgresql
+  encoding: unicode
+  pool: <%= ENV.fetch("RAILS_MAX_THREADS") { 5 } %>
+  # host: localhost  # when using localhost
+  host: db       # when using docker
+  username: postgres
+  password: postgres
+
+development:
+  <<: *default
+  database: e_store_development
+
+test:
+  <<: *default
+  database: e_store_test
+
+production:
+  <<: *default
+  url: <%= ENV['DATABASE_URL'] %>
+  database: e_store_production
+  username: e_store
+  password: <%= ENV['E_STORE_DATABASE_PASSWORD'] %>
+  pool: 10

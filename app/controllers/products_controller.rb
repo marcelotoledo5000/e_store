@@ -1,9 +1,18 @@
 class ProductsController < ApplicationController
+  before_action :set_product, only: %i[destroy show update]
+
   # POST /products
   def create
     @product = Product.create!(product_params)
 
     json_response(@product, :created)
+  end
+
+  # DELETE /products/:id
+  def destroy
+    @product.destroy
+
+    head :no_content
   end
 
   # GET /products
@@ -15,14 +24,11 @@ class ProductsController < ApplicationController
 
   # GET /products/:id
   def show
-    @product = Product.find(params[:id])
-
     json_response(@product)
   end
 
   # PUT /products/:id
   def update
-    @product = Product.find(params[:id])
     @product.update(product_params)
 
     json_response(@product, :created)
@@ -32,5 +38,9 @@ class ProductsController < ApplicationController
 
   def product_params
     params.permit(:name, :description, :stock, :price, :custom_attributes)
+  end
+
+  def set_product
+    @product = Product.find(params[:id])
   end
 end

@@ -134,4 +134,34 @@ RSpec.describe 'Products', type: :request do
       end
     end
   end
+
+  describe 'DELETE /products/:id' do
+    let!(:product) { create(:product) }
+
+    before { delete "/products/#{product_id}" }
+
+    context 'when product is not found' do
+      let(:product_id) { 'not_found' }
+
+      it { expect(json).not_to be_empty }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status :not_found
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Product/)
+      end
+    end
+
+    context 'when the record exists' do
+      let(:product_id) { product.id }
+
+      it { expect(response.body).to be_empty }
+      it { expect(response).to have_http_status :no_content }
+      it do
+        expect { product.reload }.to raise_error(ActiveRecord::RecordNotFound)
+      end
+    end
+  end
 end

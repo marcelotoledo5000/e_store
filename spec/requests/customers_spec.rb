@@ -84,4 +84,50 @@ RSpec.describe 'Customers', type: :request do
       it { expect(response).to have_http_status :ok }
     end
   end
+
+  describe 'PUT /customers/:id' do
+    let!(:customer) { create(:customer) }
+    let(:new_name) { Faker::Books::Dune.character }
+    let(:new_email) { Faker::Internet.email }
+    let(:new_attributes) do
+      {
+        name: new_name,
+        email: new_email
+      }
+    end
+
+    before do
+      put "/customers/#{customer_id}",
+          params: new_attributes
+    end
+
+    context 'when customer is not found' do
+      let(:customer_id) { 'not_found' }
+
+      it { expect(json).not_to be_empty }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status :not_found
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Customer/)
+      end
+    end
+
+    context 'when the record exists' do
+      let(:customer_id) { customer.id }
+
+      it { expect(json).not_to be_empty }
+      it { expect(response).to have_http_status :created }
+      it 'updates the record' do
+        customer.reload
+        expect(json['name']).to eq new_name
+        expect(json['email']).to eq new_email
+        expect(json['cpf']).to eq customer.cpf
+        expect(formatted_date(json['birthday'])).
+          to eq formatted_date(customer.birthday)
+      end
+    end
+  end
 end

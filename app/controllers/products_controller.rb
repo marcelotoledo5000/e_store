@@ -29,7 +29,7 @@ class ProductsController < ApplicationController
 
   # PUT /products/:id
   def update
-    @product.update(product_params)
+    @product.update!(product_params)
 
     json_response(@product, :created)
   end

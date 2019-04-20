@@ -1,0 +1,15 @@
+plugins:
+  rubocop:
+    enabled: true
+    config:
+      file: .rubocop.yml
+  brakeman:
+    enabled: true
+  bundler-audit:
+    enabled: true
+ reek:
+    enabled: true
+ rubymotion:
+    enabled: true
+  markdownlint:
+    enabled: true

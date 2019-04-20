@@ -87,4 +87,51 @@ RSpec.describe 'Products', type: :request do
       it { expect(response).to have_http_status :ok }
     end
   end
+
+  describe 'PUT /products/:id' do
+    let!(:product) { create(:product) }
+    let(:new_name) { Faker::Beer.name }
+    let(:new_description) { Faker::Beer.style }
+    let(:new_attributes) do
+      {
+        name: new_name,
+        description: new_description
+      }
+    end
+
+    before do
+      put "/products/#{product_id}",
+          params: new_attributes
+    end
+
+    context 'when product is not found' do
+      let(:product_id) { 'not_found' }
+
+      it { expect(json).not_to be_empty }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status :not_found
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Product/)
+      end
+    end
+
+    context 'when the record exists' do
+      let(:product_id) { product.id }
+
+      it { expect(json).not_to be_empty }
+      it { expect(response).to have_http_status :created }
+      it 'updates the record' do
+        product.reload
+        expect(json['name']).to eq new_name
+        expect(json['description']).to eq new_description
+        expect(json['stock']).to eq product.stock
+        expect(format('%.2f', json['price'])).
+          to eq format('%.2f', product.price)
+        expect(json['custom_attributes']).to eq product.custom_attributes
+      end
+    end
+  end
 end

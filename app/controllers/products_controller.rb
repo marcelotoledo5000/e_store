@@ -20,6 +20,13 @@ class ProductsController < ApplicationController
     json_response(@product)
   end
 
+  # PUT /products/:id
+  def update
+    @product = Product.find(params[:id])
+    @product.update(product_params)
+
+    json_response(@product, :created)
+  end
 
   private
 

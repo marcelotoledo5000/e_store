@@ -55,4 +55,33 @@ RSpec.describe 'Customers', type: :request do
       it { expect(Customer.count).to eq 50 }
     end
   end
+
+  describe 'GET /customers/:id' do
+    let!(:customer) { create(:customer) }
+
+    before do
+      get "/customers/#{customer_id}"
+    end
+
+    context 'when customer is not found' do
+      let(:customer_id) { 'not_found' }
+
+      it { expect(json).not_to be_empty }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status :not_found
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Customer/)
+      end
+    end
+
+    context 'when the record exists' do
+      let(:customer_id) { customer.id }
+
+      it { expect(json).not_to be_empty }
+      it { expect(response).to have_http_status :ok }
+    end
+  end
 end

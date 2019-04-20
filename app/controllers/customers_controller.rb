@@ -13,6 +13,13 @@ class CustomersController < ApplicationController
     json_response(@customers)
   end
 
+  # GET /customer/:id
+  def show
+    @customer = Customer.find(params[:id])
+
+    json_response(@customer)
+  end
+
   private
 
   def customer_params

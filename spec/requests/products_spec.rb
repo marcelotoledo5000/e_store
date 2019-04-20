@@ -58,4 +58,33 @@ RSpec.describe 'Products', type: :request do
       it { expect(Product.count).to eq 75 }
     end
   end
+
+  describe 'GET /products/:id' do
+    let!(:product) { create(:product) }
+
+    before do
+      get "/products/#{product_id}"
+    end
+
+    context 'when product is not found' do
+      let(:product_id) { 'not_found' }
+
+      it { expect(json).not_to be_empty }
+
+      it 'returns status code 404' do
+        expect(response).to have_http_status :not_found
+      end
+
+      it 'returns a not found message' do
+        expect(response.body).to match(/Couldn't find Product/)
+      end
+    end
+
+    context 'when the record exists' do
+      let(:product_id) { product.id }
+
+      it { expect(json).not_to be_empty }
+      it { expect(response).to have_http_status :ok }
+    end
+  end
 end

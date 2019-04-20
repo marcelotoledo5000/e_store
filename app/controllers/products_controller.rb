@@ -13,6 +13,14 @@ class ProductsController < ApplicationController
     json_response(@products)
   end
 
+  # GET /products/:id
+  def show
+    @product = Product.find(params[:id])
+
+    json_response(@product)
+  end
+
+
   private
 
   def product_params

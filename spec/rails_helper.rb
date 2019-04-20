@@ -79,6 +79,7 @@ RSpec.configure do |config|
   # Personal Configs
   config.include FactoryBot::Syntax::Methods
   config.include RequestHelper, type: :request
+  config.include FormatHelper, type: :request
 
   config.before(:suite) do
     DatabaseCleaner.clean_with(:truncation)

@@ -1,6 +1,7 @@
 env:
   global:
     - CC_TEST_REPORTER_ID=d04965756a6072a7979ce3168a27f30da9893c1651dd61df31eddb527cff1af5
+    - PGPORT=5433
 
 services:
   - postgresql
@@ -11,9 +12,6 @@ addons:
     packages:
     - postgresql-10
     - postgresql-client-10
-env:
-  global:
-  - PGPORT=5433
 
 before_script:
   - cp config/database.yml.travis config/database.yml

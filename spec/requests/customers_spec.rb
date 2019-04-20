@@ -35,4 +35,24 @@ RSpec.describe 'Customers', type: :request do
       it { expect(response).to have_http_status :created }
     end
   end
+
+  describe 'GET /customers' do
+    context 'when returns empty' do
+      before { get '/customers' }
+
+      it { expect(json).to be_empty }
+      it { expect(json.size).to eq 0 }
+    end
+
+    context 'when returns customers' do
+      before do
+        create_list(:customer, 50)
+        get '/customers'
+      end
+
+      it { expect(json).not_to be_empty }
+      it { expect(json.size).to eq 20 }
+      it { expect(Customer.count).to eq 50 }
+    end
+  end
 end

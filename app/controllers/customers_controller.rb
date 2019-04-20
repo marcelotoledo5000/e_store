@@ -6,6 +6,13 @@ class CustomersController < ApplicationController
     json_response(@customer, :created)
   end
 
+  # GET /customers
+  def index
+    @customers = Customer.order(:name).page params[:page]
+
+    json_response(@customers)
+  end
+
   private
 
   def customer_params

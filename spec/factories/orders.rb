@@ -1,6 +1,7 @@
 FactoryBot.define do
   factory :order do
     customer
+    status { 0 }
     freight { Faker::Commerce.price(5..19.9, as_string: true) }
     items do
       [

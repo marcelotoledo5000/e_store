@@ -3,4 +3,6 @@ class Order < ApplicationRecord
   has_many :items, dependent: :destroy
 
   validates :freight, :items, presence: true
+
+  enum status: %i[received approved delivered canceled]
 end

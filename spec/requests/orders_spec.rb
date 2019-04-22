@@ -44,7 +44,6 @@ RSpec.describe 'Orders', type: :request do
         expect(Order.last.items[0].quantity).to eq items[0][:quantity]
         expect(Order.last.items[1].product_id).to eq items[1][:product_id]
         expect(Order.last.items[1].quantity).to eq items[1][:quantity]
-        expect(Order.last.status).to eq :new
       end
 
       it { expect(response).to have_http_status :created }

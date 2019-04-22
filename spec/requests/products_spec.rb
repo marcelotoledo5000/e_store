@@ -27,11 +27,12 @@ RSpec.describe 'Products', type: :request do
     context 'when the request is valid' do
       before { post '/products', params: valid_attributes }
 
-      it 'creates a new contact' do
+      it 'creates a new product' do
         expect(json['name']).to eq name
         expect(json['description']).to eq description
         expect(json['stock']).to eq stock
-        expect(format('%.2f', json['price'])).to eq price
+        expect(formatted_currency(json['price'])).
+          to eq formatted_currency price
         expect(json['custom_attributes']).to eq custom_attributes
       end
 
@@ -128,8 +129,8 @@ RSpec.describe 'Products', type: :request do
         expect(json['name']).to eq new_name
         expect(json['description']).to eq new_description
         expect(json['stock']).to eq product.stock
-        expect(format('%.2f', json['price'])).
-          to eq format('%.2f', product.price)
+        expect(formatted_currency(json['price'])).
+          to eq formatted_currency product.price
         expect(json['custom_attributes']).to eq product.custom_attributes
       end
     end

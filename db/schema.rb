@@ -25,10 +25,9 @@ ActiveRecord::Schema.define(version: 2019_04_21_171424) do
   end
 
   create_table "orders", force: :cascade do |t|
-    t.datetime "date"
     t.bigint "customer_id"
     t.integer "status", default: 0
-    t.decimal "freight"
+    t.float "freight"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.index ["customer_id"], name: "index_orders_on_customer_id"

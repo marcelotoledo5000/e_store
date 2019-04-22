@@ -9,6 +9,6 @@ class OrdersController < ApplicationController
   private
 
   def order_params
-    params.permit(:date, :customer_id, :freight, :items)
+    params.permit(:customer_id, :freight, items: %i[product_id quantity])
   end
 end

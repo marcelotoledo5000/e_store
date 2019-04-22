@@ -4,24 +4,22 @@ RSpec.describe 'Orders', type: :request do
   describe 'POST /orders' do
     let(:products) { create_list(:product, 2) }
     let(:customer) { create(:customer) }
-    let(:date) { Faker::Date.between(2.days.ago, Date.today) }
     let(:freight) { Faker::Commerce.price(5..19.9, as_string: true) }
     let(:items) do
       [
         {
           product_id: products.first.id,
-          quantity: 5
+          quantity: Faker::Number.between(5, 20)
         },
         {
           product_id: products.last.id,
-          quantity: 10
+          quantity: Faker::Number.between(5, 15)
         }
       ]
     end
-    let(:invalid_attributes) { { bla: 'bla' } }
+    let(:invalid_attributes) { { bla: 'bla', items: [] } }
     let(:valid_attributes) do
       {
-        date: formatted_date(date),
         customer_id: customer.id,
         freight: freight,
         items: items
@@ -37,12 +35,16 @@ RSpec.describe 'Orders', type: :request do
     context 'when the request is valid' do
       before { post '/orders', params: valid_attributes }
 
-      it 'creates a new contact' do
-        expect(formatted_date(json['date'])).to eq formatted_date(date)
+      it 'creates a new order' do
         expect(json['customer_id']).to eq customer.id
         expect(json['status']).to eq Order.last.status
-        expect(json['freight']).to eq freight
-        expect(json['items']).to eq items
+        expect(formatted_currency(json['freight'])).
+          to eq formatted_currency freight
+        expect(Order.last.items[0].product_id).to eq items[0][:product_id]
+        expect(Order.last.items[0].quantity).to eq items[0][:quantity]
+        expect(Order.last.items[1].product_id).to eq items[1][:product_id]
+        expect(Order.last.items[1].quantity).to eq items[1][:quantity]
+        expect(Order.last.status).to eq :new
       end
 
       it { expect(response).to have_http_status :created }

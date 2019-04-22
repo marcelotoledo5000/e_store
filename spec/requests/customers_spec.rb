@@ -25,7 +25,7 @@ RSpec.describe 'Customers', type: :request do
     context 'when the request is valid' do
       before { post '/customers', params: valid_attributes }
 
-      it 'creates a new contact' do
+      it 'creates a new customer' do
         expect(json['name']).to eq name
         expect(json['cpf']).to eq cpf
         expect(json['email']).to eq email

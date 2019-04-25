@@ -1,4 +1,13 @@
-# e_store 0.0.4 (Apr 21, 2019)
+# e_store 0.0.5 (Apr 25, 2019)
+
+* TDD: Added factory to order and validations to stock
+* Somes fixes
+* Created a specific exception to stock control
+* Added ENUM to Status of the order
+
+  *Marcelo Toledo*
+
+## e_store 0.0.4 (Apr 21, 2019)
 
 * TDD: Added tests to do Create Order Model
 * Added Item Model

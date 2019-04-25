@@ -150,5 +150,34 @@ RSpec.describe 'Orders', type: :request do
       it { expect(product2.reload.stock).to eq 5 }
       it { expect(product3.reload.stock).to eq 5 }
     end
+
+    context 'when product is not foud' do
+      let(:products) { create_list(:product, 2) }
+      let(:stock1) { products.first.stock }
+      let(:stock2) { products.last.stock }
+      let(:items) do
+        [
+          {
+            product_id: products.first.id,
+            quantity: 3
+          },
+          {
+            product_id: 10_000,
+            quantity: 10
+          },
+          {
+            product_id: products.last.id,
+            quantity: 6
+          }
+        ]
+      end
+
+      before { post '/orders', params: valid_attributes }
+
+      it { expect(response).to have_http_status :not_found }
+      it { expect(response.body).to match(/Couldn't find Product with 'id'=/) }
+      it { expect(products.first.reload.stock).to eq stock1 }
+      it { expect(products.last.reload.stock).to eq stock2 }
+    end
   end
 end

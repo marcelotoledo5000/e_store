@@ -1,7 +1,7 @@
 class OrdersController < ApplicationController
   # POST /orders
   def create
-    @order = OrderCreatorService.execute(order_params)
+    @order = OrderFactory.execute(order_params)
 
     json_response(@order, :created)
   end

@@ -1,7 +1,8 @@
 FactoryBot.define do
+  # item factory with a `belongs_to` association for the order
   factory :item do
-    order { nil }
-    product { nil }
-    quantity { 1 }
+    order
+    product
+    quantity { Faker::Number.between(1, 10) }
   end
 end

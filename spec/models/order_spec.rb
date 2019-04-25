@@ -4,5 +4,8 @@ RSpec.describe Order, type: :model do
   it { should belong_to(:customer) }
   it { should have_many(:items).dependent(:destroy) }
   it { should validate_presence_of(:freight) }
-  it { should validate_presence_of(:items) }
+  it do
+    should define_enum_for(:status).
+      with_values(%i[received approved delivered canceled])
+  end
 end

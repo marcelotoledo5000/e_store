@@ -1,10 +1,17 @@
-# e_store 0.0.6 (Apr 25, 2019)
+# e_store 0.0.7 (Apr 25, 2019)
 
-* TDD: Added new test to product not found
+* TDD: Added Total Order Service
+* TDD: Added Average Ticket Service
 
   *Marcelo Toledo*
 
-# e_store 0.0.5 (Apr 25, 2019)
+## e_store 0.0.6 (Apr 25, 2019)
+
+* Added new test to product not found
+
+  *Marcelo Toledo*
+
+## e_store 0.0.5 (Apr 25, 2019)
 
 * TDD: Added factory to order and validations to stock
 * Somes fixes

@@ -1,4 +1,13 @@
-# e_store 0.0.7 (Apr 25, 2019)
+# e_store 0.0.8 (Apr 25, 2019)
+
+* TDD: Added Index to Order
+* Renamed some described tests
+* Update README.md
+* Added seeds
+
+  *Marcelo Toledo*
+
+## e_store 0.0.7 (Apr 25, 2019)
 
 * TDD: Added Total Order Service
 * TDD: Added Average Ticket Service

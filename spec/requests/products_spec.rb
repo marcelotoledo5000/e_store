@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Products', type: :request do
+RSpec.describe 'ProductsController', type: :request do
   describe 'POST /products' do
     let(:name) { Faker::Beer.name }
     let(:description) { Faker::Beer.style }

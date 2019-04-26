@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Customers', type: :request do
+RSpec.describe 'CustomersController', type: :request do
   describe 'POST /customers' do
     let(:name) { Faker::Books::Dune.character }
     let(:cpf) { Faker::IDNumber.brazilian_citizen_number }

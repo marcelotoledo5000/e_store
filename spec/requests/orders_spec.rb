@@ -1,6 +1,6 @@
 require 'rails_helper'
 
-RSpec.describe 'Orders', type: :request do
+RSpec.describe 'OrdersController', type: :request do
   describe 'POST /orders' do
     let(:products) { create_list(:product, 2) }
     let(:customer) { create(:customer) }
@@ -178,6 +178,26 @@ RSpec.describe 'Orders', type: :request do
       it { expect(response.body).to match(/Couldn't find Product with 'id'=/) }
       it { expect(products.first.reload.stock).to eq stock1 }
       it { expect(products.last.reload.stock).to eq stock2 }
+    end
+  end
+
+  describe 'GET /orders' do
+    context 'when returns empty' do
+      before { get '/orders' }
+
+      it { expect(json).to be_empty }
+      it { expect(json.size).to eq 0 }
+    end
+
+    context 'when returns orders' do
+      before do
+        create_list(:order_with_items, 30)
+        get '/orders'
+      end
+
+      it { expect(json).not_to be_empty }
+      it { expect(json.size).to eq 20 }
+      it { expect(Order.count).to eq 30 }
     end
   end
 end

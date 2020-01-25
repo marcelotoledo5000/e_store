@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'OrdersController', type: :request do
+describe 'OrdersController', type: :request do
   describe 'POST /orders' do
     let(:products) { create_list(:product, 2) }
     let(:customer) { create(:customer) }

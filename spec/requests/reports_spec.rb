@@ -2,7 +2,7 @@
 
 require 'rails_helper'
 
-RSpec.describe 'ReportsController', type: :request do
+describe 'ReportsController', type: :request do
   describe 'GET /reports/average_ticket' do
     let!(:order1) do
       order = create(:order_with_items)

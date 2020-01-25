@@ -1,8 +1,18 @@
-# e_store 0.0.8 (Apr 25, 2019)
+# e_store 0.0.9 (Jan 25, 2020)
+
+* Updated Ruby version
+* Updated Rails version
+* Updated docker-compose
+* Updated gems
+* Updated README.md
+
+  *Marcelo Toledo*
+
+## e_store 0.0.8 (Apr 25, 2019)
 
 * TDD: Added Index to Order
 * Renamed some described tests
-* Update README.md
+* Updated README.md
 * Added seeds
 
   *Marcelo Toledo*

@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module FormatHelper
   # Format datetime to '%Y-%m-%dT%l:%M:%S%z' => '20190420T00:00:00-0000'
   def formatted_date(date)

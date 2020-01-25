@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module OrderFactory
   def self.execute(order_params)
     ActiveRecord::Base.transaction do

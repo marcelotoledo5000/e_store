@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AverageTicketService
   def self.execute(period_params)
     orders = selected_orders(period_params)

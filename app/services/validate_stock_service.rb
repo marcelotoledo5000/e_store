@@ -1,5 +1,7 @@
+# frozen_string_literal: true
+
 module ValidateStockService
-  MSG_STOCK = 'Stock is not available'.freeze
+  MSG_STOCK = 'Stock is not available'
 
   def self.execute(order_params)
     parsed_items = []

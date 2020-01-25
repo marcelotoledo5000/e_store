@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 # https://github.com/thoughtbot/factory_bot/blob/master/GETTING_STARTED.md
 # Generating data for a `has_many` relationship
 

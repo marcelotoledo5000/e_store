@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 class ReportsController < ApplicationController
   # GET: /reports/average_ticket
   def average_ticket

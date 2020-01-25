@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module TotalOrderService
   def self.execute(order)
     subtotal = 0

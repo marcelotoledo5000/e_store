@@ -1,7 +1,6 @@
 source 'https://rubygems.org'
 git_source(:github) { |repo| "https://github.com/#{repo}.git" }
 
-ruby '2.6.0'
 
 gem 'bootsnap', '~> 1.4', '>= 1.4.2', require: false
 gem 'coffee-rails', '~> 4.2', '>= 4.2.2'
@@ -12,6 +11,7 @@ gem 'puma', '~> 3.12', '>= 3.12.1'
 gem 'rack-cors', '~> 1.0', '>= 1.0.3'
 gem 'rails', '~> 5.2', '>= 5.2.3'
 gem 'sass-rails', '~> 5.0', '>= 5.0.7'
+ruby '2.7.0'
 gem 'turbolinks', '~> 5.2'
 gem 'uglifier', '~> 4.1', '>= 4.1.20'
 

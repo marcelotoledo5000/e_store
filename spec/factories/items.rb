@@ -5,6 +5,6 @@ FactoryBot.define do
   factory :item do
     order
     product
-    quantity { Faker::Number.between(1, 10) }
+    quantity { Faker::Number.between(from: 1, to: 10) }
   end
 end

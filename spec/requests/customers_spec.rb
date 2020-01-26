@@ -7,7 +7,7 @@ describe 'CustomersController', type: :request do
     let(:name) { Faker::Books::Dune.character }
     let(:cpf) { Faker::IDNumber.brazilian_citizen_number }
     let(:email) { Faker::Internet.email }
-    let(:birthday) { Faker::Date.birthday(18, 65) }
+    let(:birthday) { Faker::Date.birthday(min_age: 18, max_age: 65) }
     let(:invalid_attributes) { { name: name } }
     let(:valid_attributes) do
       {

@@ -6,16 +6,16 @@ describe 'OrdersController', type: :request do
   describe 'POST /orders' do
     let(:products) { create_list(:product, 2) }
     let(:customer) { create(:customer) }
-    let(:freight) { Faker::Commerce.price(5..19.9, as_string: true) }
+    let(:freight) { Faker::Commerce.price(range: 5..19.9, as_string: true) }
     let(:items) do
       [
         {
           product_id: products.first.id,
-          quantity: Faker::Number.between(5, 20)
+          quantity: Faker::Number.between(from: 5, to: 20)
         },
         {
           product_id: products.last.id,
-          quantity: Faker::Number.between(5, 15)
+          quantity: Faker::Number.between(from: 5, to: 15)
         }
       ]
     end
@@ -55,7 +55,7 @@ describe 'OrdersController', type: :request do
 
   describe 'validations' do
     let(:customer) { create(:customer) }
-    let(:freight) { Faker::Commerce.price(5..19.9, as_string: true) }
+    let(:freight) { Faker::Commerce.price(range: 5..19.9, as_string: true) }
     let(:valid_attributes) do
       {
         customer_id: customer.id,

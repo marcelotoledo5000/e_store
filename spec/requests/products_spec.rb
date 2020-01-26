@@ -6,8 +6,8 @@ describe 'ProductsController', type: :request do
   describe 'POST /products' do
     let(:name) { Faker::Beer.name }
     let(:description) { Faker::Beer.style }
-    let(:stock) { Faker::Number.between(1, 100) }
-    let(:price) { Faker::Commerce.price(10..99.9, as_string: true) }
+    let(:stock) { Faker::Number.between(from: 1, to: 100) }
+    let(:price) { Faker::Commerce.price(range: 10..99.9, as_string: true) }
     let(:custom_attributes) { Faker::ChuckNorris.fact }
     let(:invalid_attributes) { { name: name } }
     let(:valid_attributes) do

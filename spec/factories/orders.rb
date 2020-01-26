@@ -8,7 +8,7 @@ FactoryBot.define do
   factory :order do
     customer
     status { 'received' }
-    freight { Faker::Commerce.price(5..19.9, as_string: true) }
+    freight { Faker::Commerce.price(range: 5..19.9, as_string: true) }
 
     # order_with_items will create item data after the order has been created
     factory :order_with_items do

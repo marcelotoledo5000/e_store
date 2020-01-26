@@ -40,7 +40,11 @@ describe 'ReportsController', type: :request do
     end
 
     context 'when the request is valid' do
-      before { get '/reports/average_ticket', params: period }
+      before do
+        order1
+        order4
+        get '/reports/average_ticket', params: period
+      end
 
       it { expect(response).to have_http_status :ok }
 

@@ -91,18 +91,9 @@ describe 'OrdersController', type: :request do
       let(:product3) { create(:product, stock: 5) }
       let(:items) do
         [
-          {
-            product_id: product1.id,
-            quantity: 3
-          },
-          {
-            product_id: product2.id,
-            quantity: 4
-          },
-          {
-            product_id: product3.id,
-            quantity: 5
-          }
+          { product_id: product1.id, quantity: 3 },
+          { product_id: product2.id, quantity: 4 },
+          { product_id: product3.id, quantity: 5 }
         ]
       end
 
@@ -121,27 +112,18 @@ describe 'OrdersController', type: :request do
     end
 
     context 'when stock is not available for least one item' do
+      subject { post '/orders', params: valid_attributes }
+
       let(:product1) { create(:product, stock: 5) }
       let(:product2) { create(:product, stock: 5) }
       let(:product3) { create(:product, stock: 5) }
       let(:items) do
         [
-          {
-            product_id: product1.id,
-            quantity: 3
-          },
-          {
-            product_id: product2.id,
-            quantity: 4
-          },
-          {
-            product_id: product3.id,
-            quantity: 6
-          }
+          { product_id: product1.id, quantity: 3 },
+          { product_id: product2.id, quantity: 4 },
+          { product_id: product3.id, quantity: 6 }
         ]
       end
-
-      subject { post '/orders', params: valid_attributes }
 
       it 'raise error and does not creates the order' do
         expect { subject }.
@@ -159,18 +141,9 @@ describe 'OrdersController', type: :request do
       let(:stock2) { products.last.stock }
       let(:items) do
         [
-          {
-            product_id: products.first.id,
-            quantity: 3
-          },
-          {
-            product_id: 10_000,
-            quantity: 10
-          },
-          {
-            product_id: products.last.id,
-            quantity: 6
-          }
+          { product_id: products.first.id, quantity: 3 },
+          { product_id: 10_000, quantity: 10 },
+          { product_id: products.last.id, quantity: 6 }
         ]
       end
 

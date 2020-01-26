@@ -126,6 +126,7 @@ describe 'ProductsController', type: :request do
 
       it { expect(json).not_to be_empty }
       it { expect(response).to have_http_status :created }
+
       it 'updates the record' do
         product.reload
         expect(json['name']).to eq new_name
@@ -162,6 +163,7 @@ describe 'ProductsController', type: :request do
 
       it { expect(response.body).to be_empty }
       it { expect(response).to have_http_status :no_content }
+
       it do
         expect { product.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end

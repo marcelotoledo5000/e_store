@@ -1,19 +1,21 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'OrdersController', type: :request do
+describe 'OrdersController', type: :request do
   describe 'POST /orders' do
     let(:products) { create_list(:product, 2) }
     let(:customer) { create(:customer) }
-    let(:freight) { Faker::Commerce.price(5..19.9, as_string: true) }
+    let(:freight) { Faker::Commerce.price(range: 5..19.9, as_string: true) }
     let(:items) do
       [
         {
           product_id: products.first.id,
-          quantity: Faker::Number.between(5, 20)
+          quantity: Faker::Number.between(from: 5, to: 20)
         },
         {
           product_id: products.last.id,
-          quantity: Faker::Number.between(5, 15)
+          quantity: Faker::Number.between(from: 5, to: 15)
         }
       ]
     end
@@ -53,7 +55,7 @@ RSpec.describe 'OrdersController', type: :request do
 
   describe 'validations' do
     let(:customer) { create(:customer) }
-    let(:freight) { Faker::Commerce.price(5..19.9, as_string: true) }
+    let(:freight) { Faker::Commerce.price(range: 5..19.9, as_string: true) }
     let(:valid_attributes) do
       {
         customer_id: customer.id,
@@ -89,18 +91,9 @@ RSpec.describe 'OrdersController', type: :request do
       let(:product3) { create(:product, stock: 5) }
       let(:items) do
         [
-          {
-            product_id: product1.id,
-            quantity: 3
-          },
-          {
-            product_id: product2.id,
-            quantity: 4
-          },
-          {
-            product_id: product3.id,
-            quantity: 5
-          }
+          { product_id: product1.id, quantity: 3 },
+          { product_id: product2.id, quantity: 4 },
+          { product_id: product3.id, quantity: 5 }
         ]
       end
 
@@ -119,27 +112,18 @@ RSpec.describe 'OrdersController', type: :request do
     end
 
     context 'when stock is not available for least one item' do
+      subject { post '/orders', params: valid_attributes }
+
       let(:product1) { create(:product, stock: 5) }
       let(:product2) { create(:product, stock: 5) }
       let(:product3) { create(:product, stock: 5) }
       let(:items) do
         [
-          {
-            product_id: product1.id,
-            quantity: 3
-          },
-          {
-            product_id: product2.id,
-            quantity: 4
-          },
-          {
-            product_id: product3.id,
-            quantity: 6
-          }
+          { product_id: product1.id, quantity: 3 },
+          { product_id: product2.id, quantity: 4 },
+          { product_id: product3.id, quantity: 6 }
         ]
       end
-
-      subject { post '/orders', params: valid_attributes }
 
       it 'raise error and does not creates the order' do
         expect { subject }.
@@ -157,18 +141,9 @@ RSpec.describe 'OrdersController', type: :request do
       let(:stock2) { products.last.stock }
       let(:items) do
         [
-          {
-            product_id: products.first.id,
-            quantity: 3
-          },
-          {
-            product_id: 10_000,
-            quantity: 10
-          },
-          {
-            product_id: products.last.id,
-            quantity: 6
-          }
+          { product_id: products.first.id, quantity: 3 },
+          { product_id: 10_000, quantity: 10 },
+          { product_id: products.last.id, quantity: 6 }
         ]
       end
 

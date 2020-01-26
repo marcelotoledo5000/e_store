@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'CustomersController', type: :request do
+describe 'CustomersController', type: :request do
   describe 'POST /customers' do
     let(:name) { Faker::Books::Dune.character }
     let(:cpf) { Faker::IDNumber.brazilian_citizen_number }
     let(:email) { Faker::Internet.email }
-    let(:birthday) { Faker::Date.birthday(18, 65) }
+    let(:birthday) { Faker::Date.birthday(min_age: 18, max_age: 65) }
     let(:invalid_attributes) { { name: name } }
     let(:valid_attributes) do
       {
@@ -25,14 +27,14 @@ RSpec.describe 'CustomersController', type: :request do
     context 'when the request is valid' do
       before { post '/customers', params: valid_attributes }
 
+      it { expect(response).to have_http_status :created }
+
       it 'creates a new customer' do
         expect(json['name']).to eq name
         expect(json['cpf']).to eq cpf
         expect(json['email']).to eq email
         expect(formatted_date(json['birthday'])).to eq formatted_date(birthday)
       end
-
-      it { expect(response).to have_http_status :created }
     end
   end
 
@@ -57,11 +59,9 @@ RSpec.describe 'CustomersController', type: :request do
   end
 
   describe 'GET /customers/:id' do
-    let!(:customer) { create(:customer) }
+    let(:customer) { create(:customer) }
 
-    before do
-      get "/customers/#{customer_id}"
-    end
+    before { get "/customers/#{customer_id}" }
 
     context 'when customer is not found' do
       let(:customer_id) { 'not_found' }
@@ -86,7 +86,7 @@ RSpec.describe 'CustomersController', type: :request do
   end
 
   describe 'PUT /customers/:id' do
-    let!(:customer) { create(:customer) }
+    let(:customer) { create(:customer) }
     let(:new_name) { Faker::Books::Dune.character }
     let(:new_email) { Faker::Internet.email }
     let(:new_attributes) do
@@ -96,10 +96,7 @@ RSpec.describe 'CustomersController', type: :request do
       }
     end
 
-    before do
-      put "/customers/#{customer_id}",
-          params: new_attributes
-    end
+    before { put "/customers/#{customer_id}", params: new_attributes }
 
     context 'when customer is not found' do
       let(:customer_id) { 'not_found' }
@@ -120,6 +117,7 @@ RSpec.describe 'CustomersController', type: :request do
 
       it { expect(json).not_to be_empty }
       it { expect(response).to have_http_status :created }
+
       it 'updates the record' do
         customer.reload
         expect(json['name']).to eq new_name

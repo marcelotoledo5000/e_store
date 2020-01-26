@@ -10,13 +10,15 @@ Is a Rails application to management Products, Orders, Items and Reports.
 
 ## Technical Informations and dependencies
 
-* The Ruby language - version 2.6.0
-* The Rails gem     - version 5.2.3
-* RSpec             - version 3.8.2
-* Rubocop           - version 0.67.2
-* PostgreSQL        - version 10
-* Docker            - version 18.09.4
-* Docker Compose    - version 1.24.0
+```code
+- The Ruby language - version 2.7.0
+- The Rails gem     - version 6.0
+- RSpec             - version 4.0.0.beta4
+- Rubocop           - version 0.79.0
+- PostgreSQL        - version 10
+- Docker            - version 19.03.5-ce
+- Docker Compose    - version 1.25.1
+```
 
 ## To use
 
@@ -27,19 +29,7 @@ git clone git@github.com:marcelotoledo5000/e_store.git
 cd e_store
 ```
 
-Needs to update `config/database.yml` to use in:
-
-``` Yaml
-host: localhost   # when using localhost
-```
-
-OR
-
-``` Yaml
-host: db          # when using docker
-```
-
-### With Docker
+### With Docker (better option)
 
 ``` Shell
 script/setup    # => development bootstrap, preparing containers
@@ -48,11 +38,29 @@ script/console  # => starts console
 script/test     # => running tests
 ```
 
-### Running Local
+#### Running without Docker (not recommended!)
+
+If you prefer, you'll need to update `config/database.yml`:
+
+``` Yaml
+# host: db        # when using docker
+host: localhost   # when using localhost
+```
 
 System dependencies:
 
 * Install and configure the database: [Postgresql-10](https://www.postgresql.org/download/)
+
+And then:
+
+``` Shell
+gem install bundler         # => install the last Bundler version
+bundle install              # => install the project's gems
+rails db:setup db:migrate   # => prepare the database
+rails s                     # => starts server
+rails c                     # => starts console
+bundle exec rspec           # => to running tests
+```
 
 ### To run app
 
@@ -103,7 +111,7 @@ CREATE
 ```code
 POST: http://DOMAIN/products
 "http://localhost:3000/products"
-Param: Body, JSON(application/json)
+Params: Body, JSON(application/json)
 ```
 
 ```json
@@ -125,9 +133,9 @@ Response:
 UPDATE
 
 ```code
-PUT: http://DOMAIN/products/1
+PUT: http://DOMAIN/products/ID
 "http://localhost:3000/products/1"
-Param: Body, JSON(application/json)
+Params: Body, JSON(application/json)
 ```
 
 ```json
@@ -150,7 +158,6 @@ DESTROY
 ```code
 DELETE: http://DOMAIN/products/ID
 "http://localhost:3000/products/2"
-Param: Body, JSON(application/json)
 ```
 
 Response:
@@ -192,7 +199,7 @@ CREATE
 ```code
 POST: http://DOMAIN/customers
 "http://localhost:3000/customers"
-Param: Body, JSON(application/json)
+Params: Body, JSON(application/json)
 ```
 
 ```json
@@ -213,9 +220,9 @@ Response:
 UPDATE
 
 ```code
-PUT: http://DOMAIN/customers/1
+PUT: http://DOMAIN/customers/ID
 "http://localhost:3000/customers/1"
-Param: Body, JSON(application/json)
+Params: Body, JSON(application/json)
 ```
 
 ```json
@@ -251,7 +258,7 @@ CREATE
 ```code
 POST: http://DOMAIN/customers
 "http://localhost:3000/customers"
-Param: Body, JSON(application/json)
+Params: Body, JSON(application/json)
 ```
 
 ```json
@@ -284,7 +291,7 @@ AVERAGE_TICKET
 ```code
 GET: http://DOMAIN/reports/average_ticket
 "http://localhost:3000/reports/average_ticket"
-Param: Body, JSON(application/json)
+Params: Body, JSON(application/json)
 ```
 
 ```json

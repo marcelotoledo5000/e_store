@@ -1,11 +1,13 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe 'ProductsController', type: :request do
+describe 'ProductsController', type: :request do
   describe 'POST /products' do
     let(:name) { Faker::Beer.name }
     let(:description) { Faker::Beer.style }
-    let(:stock) { Faker::Number.between(1, 100) }
-    let(:price) { Faker::Commerce.price(10..99.9, as_string: true) }
+    let(:stock) { Faker::Number.between(from: 1, to: 100) }
+    let(:price) { Faker::Commerce.price(range: 10..99.9, as_string: true) }
     let(:custom_attributes) { Faker::ChuckNorris.fact }
     let(:invalid_attributes) { { name: name } }
     let(:valid_attributes) do
@@ -124,6 +126,7 @@ RSpec.describe 'ProductsController', type: :request do
 
       it { expect(json).not_to be_empty }
       it { expect(response).to have_http_status :created }
+
       it 'updates the record' do
         product.reload
         expect(json['name']).to eq new_name
@@ -160,6 +163,7 @@ RSpec.describe 'ProductsController', type: :request do
 
       it { expect(response.body).to be_empty }
       it { expect(response).to have_http_status :no_content }
+
       it do
         expect { product.reload }.to raise_error(ActiveRecord::RecordNotFound)
       end

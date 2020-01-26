@@ -1,3 +1,5 @@
+# frozen_string_literal: true
+
 module AverageTicketService
   def self.execute(period_params)
     orders = selected_orders(period_params)
@@ -12,15 +14,14 @@ module AverageTicketService
   end
 
   def self.total_value_of_orders(orders)
-    total_value = 0
-    orders.each do |order|
-      total_value += TotalOrderService.execute(order)
+    total_value = orders.reduce(0) do |value, order|
+      value + TotalOrderService.execute(order)
     end
 
-    total_value
+    total_value.round(2)
   end
 
   def self.average_ticket(orders)
-    total_value_of_orders(orders) / orders.count
+    (total_value_of_orders(orders) / orders.count).round(2)
   end
 end

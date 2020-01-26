@@ -1,3 +1,5 @@
+dist: trusty
+
 env:
   global:
     - CC_TEST_REPORTER_ID=d04965756a6072a7979ce3168a27f30da9893c1651dd61df31eddb527cff1af5
@@ -22,10 +24,10 @@ before_script:
 language: ruby
 
 rvm:
-  - 2.6.0
+  - 2.7.0
 
 script:
-  - bundle exec rails db:reset db:setup db:migrate RAILS_ENV=test
+  - bundle exec rails db:reset db:setup db:migrate
   - bundle exec rspec
   - bundle exec rubocop --config .rubocop.yml
 

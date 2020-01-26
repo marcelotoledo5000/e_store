@@ -1,7 +1,9 @@
+# frozen_string_literal: true
+
 require 'rails_helper'
 
-RSpec.describe Item, type: :model do
-  it { should belong_to(:order) }
-  it { should belong_to(:product) }
-  it { should validate_presence_of(:quantity) }
+describe Item, type: :model do
+  it { is_expected.to belong_to(:order) }
+  it { is_expected.to belong_to(:product) }
+  it { is_expected.to validate_presence_of(:quantity) }
 end

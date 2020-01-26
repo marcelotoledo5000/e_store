@@ -5,6 +5,8 @@
 * Updated docker-compose
 * Updated gems
 * Updated README.md
+* Fix average tickets service
+* Fix total order service
 
   *Marcelo Toledo*
 

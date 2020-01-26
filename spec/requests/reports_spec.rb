@@ -29,12 +29,12 @@ describe 'ReportsController', type: :request do
       }
     end
     let(:total_order_2) do
-      item = order2.items.first.product.price
+      item = order2.items.first.product.price * order2.items.first.quantity
       freight = order2.freight
       item + freight
     end
     let(:total_order_3) do
-      item = order3.items.first.product.price
+      item = order3.items.first.product.price * order3.items.first.quantity
       freight = order3.freight
       item + freight
     end
@@ -50,19 +50,21 @@ describe 'ReportsController', type: :request do
 
       it do
         order = Order.find order2.id
-        total = order.items.first.product.price + order.freight
-        expect(total_order_2).to eq total
+        subtotal = order.items.first.product.price * order.items.first.quantity
+        total = subtotal + order.freight
+        expect(total_order_2.round(2)).to eq total.round(2)
       end
 
       it do
         order = Order.find order3.id
-        total = order.items.first.product.price + order.freight
-        expect(total_order_3).to eq total
+        subtotal = order.items.first.product.price * order.items.first.quantity
+        total = subtotal + order.freight
+        expect(total_order_3.round(2)).to eq total.round(2)
       end
 
       it do
         average = (total_order_2 + total_order_3)
-        expect(json).to eq average / 2
+        expect(json).to eq((average / 2).round(2))
       end
     end
 

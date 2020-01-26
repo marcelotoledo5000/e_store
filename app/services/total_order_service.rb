@@ -2,11 +2,10 @@
 
 module TotalOrderService
   def self.execute(order)
-    subtotal = 0
-    order.items.each do |item|
-      subtotal += item.product.price
+    subtotal = order.items.reduce(0) do |value, item|
+      value + (item.product[:price] * item.quantity)
     end
 
-    subtotal + order.freight
+    (subtotal + order.freight).round(2)
   end
 end

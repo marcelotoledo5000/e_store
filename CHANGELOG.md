@@ -1,4 +1,10 @@
-# e_store 0.0.10 (Mai 02, 2020)
+# e_store 0.0.11 (Mai 03, 2020)
+
+* Update README.md
+
+  *Marcelo Toledo*
+
+## e_store 0.0.10 (Mai 02, 2020)
 
 * Fix pending test
 * Updated docker-compose

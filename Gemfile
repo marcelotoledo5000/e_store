@@ -18,6 +18,7 @@ gem 'turbolinks', '~> 5.2'
 gem 'uglifier', '~> 4.2'
 
 group :development, :test do
+  gem 'codecov', require: false
   gem 'database_cleaner', '~> 1.7'
   gem 'factory_bot_rails', '~> 5.1'
   gem 'faker', '~> 2.10'

@@ -1,6 +1,6 @@
 # README
 
-[![Maintainability][codeclimate-badge-maintainability]][codeclimate-maintainability] [![Test Coverage][codeclimate-badge-coverage]][codeclimate-coverage] [![Build Status][travis-badge]][travis]
+[![codebeat badge][codebeat-badge]][codebeat] [![Maintainability][codeclimate-badge-maintainability]][codeclimate-maintainability] [![Test Coverage][badge-coverage]][coverage] [![Build Status][travis-badge]][travis]
 
 ## About this project
 
@@ -329,3 +329,9 @@ Response:
 
 [travis-badge]: https://travis-ci.com/marcelotoledo5000/e_store.svg?branch=master
 [travis]: https://travis-ci.com/marcelotoledo5000/e_store
+
+[codebeat-badge]: https://codebeat.co/badges/477ad5b7-995f-4590-b98e-a3a27bd318e6
+[codebeat]: https://codebeat.co/projects/github-com-marcelotoledo5000-e_store-master
+
+[badge-coverage]: https://codecov.io/gh/marcelotoledo5000/e_store/branch/master/graph/badge.svg
+[coverage]: https://codecov.io/gh/marcelotoledo5000/e_store

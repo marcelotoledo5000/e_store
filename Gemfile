@@ -23,7 +23,7 @@ group :development, :test do
   gem 'faker', '~> 2.10'
   gem 'pry-byebug', '~> 3.8'
   gem 'rspec-rails', '~> 4.0.0.beta4'
-  gem 'rubocop', '~> 0.79.0'
+  gem 'rubocop', '~> 0.82.0'
   gem 'rubocop-performance', '~> 1.5'
   gem 'rubocop-rails', '~> 2.4'
   gem 'rubocop-rspec', '~> 1.37'

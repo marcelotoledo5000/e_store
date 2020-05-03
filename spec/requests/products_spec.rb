@@ -21,13 +21,13 @@ describe 'ProductsController', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/products', params: invalid_attributes }
+      before { post products_path, params: invalid_attributes }
 
       it { expect(response).to have_http_status :unprocessable_entity }
     end
 
     context 'when the request is valid' do
-      before { post '/products', params: valid_attributes }
+      before { post products_path, params: valid_attributes }
 
       it 'creates a new product' do
         expect(json['name']).to eq name
@@ -44,7 +44,7 @@ describe 'ProductsController', type: :request do
 
   describe 'GET /products' do
     context 'when returns empty' do
-      before { get '/products' }
+      before { get products_path }
 
       it { expect(json).to be_empty }
       it { expect(json.size).to eq 0 }
@@ -53,7 +53,7 @@ describe 'ProductsController', type: :request do
     context 'when returns products' do
       before do
         create_list(:product, 75)
-        get '/products'
+        get products_path
       end
 
       it { expect(json).not_to be_empty }
@@ -65,9 +65,7 @@ describe 'ProductsController', type: :request do
   describe 'GET /products/:id' do
     let!(:product) { create(:product) }
 
-    before do
-      get "/products/#{product_id}"
-    end
+    before { get product_path(product_id) }
 
     context 'when product is not found' do
       let(:product_id) { 'not_found' }
@@ -103,7 +101,7 @@ describe 'ProductsController', type: :request do
     end
 
     before do
-      put "/products/#{product_id}",
+      put product_path(product_id),
           params: new_attributes
     end
 
@@ -142,7 +140,7 @@ describe 'ProductsController', type: :request do
   describe 'DELETE /products/:id' do
     let!(:product) { create(:product) }
 
-    before { delete "/products/#{product_id}" }
+    before { delete product_path(product_id) }
 
     context 'when product is not found' do
       let(:product_id) { 'not_found' }

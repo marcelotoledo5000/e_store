@@ -29,13 +29,13 @@ describe 'OrdersController', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/orders', params: invalid_attributes }
+      before { post orders_path, params: invalid_attributes }
 
       it { expect(response).to have_http_status :unprocessable_entity }
     end
 
     context 'when the request is valid' do
-      before { post '/orders', params: valid_attributes }
+      before { post orders_path, params: valid_attributes }
 
       it 'creates a new order' do
         expect(json['customer_id']).to eq customer.id
@@ -66,16 +66,9 @@ describe 'OrdersController', type: :request do
 
     context 'when stock is available for one item' do
       let(:product) { create(:product, stock: 5) }
-      let(:items) do
-        [
-          {
-            product_id: product.id,
-            quantity: 5
-          }
-        ]
-      end
+      let(:items) { [{ product_id: product.id, quantity: 5 }] }
 
-      before { post '/orders', params: valid_attributes }
+      before { post orders_path, params: valid_attributes }
 
       it 'creates the order and decreases the stock' do
         expect(Item.last.product_id).to eq product.id
@@ -97,7 +90,7 @@ describe 'OrdersController', type: :request do
         ]
       end
 
-      before { post '/orders', params: valid_attributes }
+      before { post orders_path, params: valid_attributes }
 
       it 'creates the order and decreases the stock of all items' do
         expect(Item.last.product_id).to eq product3.id
@@ -112,7 +105,7 @@ describe 'OrdersController', type: :request do
     end
 
     context 'when stock is not available for least one item' do
-      subject { post '/orders', params: valid_attributes }
+      subject(:post_request) { post orders_path, params: valid_attributes }
 
       let(:product1) { create(:product, stock: 5) }
       let(:product2) { create(:product, stock: 5) }
@@ -126,7 +119,7 @@ describe 'OrdersController', type: :request do
       end
 
       it 'raise error and does not creates the order' do
-        expect { subject }.
+        expect { post_request }.
           to raise_exception StockIsNotAvailable, 'Stock is not available'
       end
 
@@ -147,7 +140,7 @@ describe 'OrdersController', type: :request do
         ]
       end
 
-      before { post '/orders', params: valid_attributes }
+      before { post orders_path, params: valid_attributes }
 
       it { expect(response).to have_http_status :not_found }
       it { expect(response.body).to match(/Couldn't find Product with 'id'=/) }
@@ -158,7 +151,7 @@ describe 'OrdersController', type: :request do
 
   describe 'GET /orders' do
     context 'when returns empty' do
-      before { get '/orders' }
+      before { get orders_path }
 
       it { expect(json).to be_empty }
       it { expect(json.size).to eq 0 }
@@ -167,7 +160,7 @@ describe 'OrdersController', type: :request do
     context 'when returns orders' do
       before do
         create_list(:order_with_items, 30)
-        get '/orders'
+        get orders_path
       end
 
       it { expect(json).not_to be_empty }

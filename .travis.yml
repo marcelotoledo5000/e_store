@@ -2,7 +2,6 @@ dist: trusty
 
 env:
   global:
-    - CC_TEST_REPORTER_ID=d04965756a6072a7979ce3168a27f30da9893c1651dd61df31eddb527cff1af5
     - PGPORT=5433
 
 services:
@@ -16,10 +15,8 @@ addons:
     - postgresql-client-10
 
 before_script:
+  - export RUBYOPT='-W0' # to remove ruby 2.7 warnings
   - cp config/database.yml.travis config/database.yml
-  - curl -L https://codeclimate.com/downloads/test-reporter/test-reporter-latest-linux-amd64 > ./cc-test-reporter
-  - chmod +x ./cc-test-reporter
-  - ./cc-test-reporter before-build
 
 language: ruby
 
@@ -34,6 +31,3 @@ script:
 before_install:
   - gem update --system
   - gem install bundler
-
-after_script:
-  - ./cc-test-reporter after-build --exit-code $TRAVIS_TEST_RESULT

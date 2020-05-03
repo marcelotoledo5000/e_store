@@ -1,9 +1,21 @@
+# frozen_string_literal: true
+
 require 'spec_helper'
 ENV['RAILS_ENV'] ||= 'test'
 
 require 'database_cleaner'
 require 'simplecov'
-SimpleCov.start
+require 'codecov'
+
+SimpleCov.start do
+  enable_coverage :branch
+  SimpleCov.formatters = SimpleCov::Formatter::MultiFormatter.new(
+    [
+      SimpleCov::Formatter::HTMLFormatter,
+      SimpleCov::Formatter::Codecov
+    ]
+  )
+end
 
 require File.expand_path('../../config/environment', __FILE__)
 abort("The Rails environment is running in production mode!") if Rails.env.production?

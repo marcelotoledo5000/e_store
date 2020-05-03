@@ -4,7 +4,7 @@
 
 ## About this project
 
-This project is just a simple API-only to an little bit "E-Commerce".
+This project is just a simple API for a small "E-Commerce".
 
 Is a Rails application to management Products, Orders, Items and Reports.
 

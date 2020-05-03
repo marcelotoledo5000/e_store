@@ -11,6 +11,6 @@ class ReportsController < ApplicationController
   private
 
   def period_params
-    params.permit(:initial_date, :final_date)
+    params.required(:report).permit(:initial_date, :final_date)
   end
 end

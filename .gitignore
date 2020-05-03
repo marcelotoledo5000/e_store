@@ -25,3 +25,11 @@
 
 # Ignore coverage
 coverage
+
+# rspec
+/spec/examples.txt
+
+# env files
+*.development
+*.test
+.env

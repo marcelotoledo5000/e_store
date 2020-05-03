@@ -19,13 +19,13 @@ describe 'CustomersController', type: :request do
     end
 
     context 'when the request is invalid' do
-      before { post '/customers', params: invalid_attributes }
+      before { post customers_path, params: invalid_attributes }
 
       it { expect(response).to have_http_status :unprocessable_entity }
     end
 
     context 'when the request is valid' do
-      before { post '/customers', params: valid_attributes }
+      before { post customers_path, params: valid_attributes }
 
       it { expect(response).to have_http_status :created }
 
@@ -40,7 +40,7 @@ describe 'CustomersController', type: :request do
 
   describe 'GET /customers' do
     context 'when returns empty' do
-      before { get '/customers' }
+      before { get customers_path }
 
       it { expect(json).to be_empty }
       it { expect(json.size).to eq 0 }
@@ -49,7 +49,7 @@ describe 'CustomersController', type: :request do
     context 'when returns customers' do
       before do
         create_list(:customer, 50)
-        get '/customers'
+        get customers_path
       end
 
       it { expect(json).not_to be_empty }
@@ -61,7 +61,7 @@ describe 'CustomersController', type: :request do
   describe 'GET /customers/:id' do
     let(:customer) { create(:customer) }
 
-    before { get "/customers/#{customer_id}" }
+    before { get customer_path(customer_id) }
 
     context 'when customer is not found' do
       let(:customer_id) { 'not_found' }
@@ -96,7 +96,7 @@ describe 'CustomersController', type: :request do
       }
     end
 
-    before { put "/customers/#{customer_id}", params: new_attributes }
+    before { put customer_path(customer_id), params: new_attributes }
 
     context 'when customer is not found' do
       let(:customer_id) { 'not_found' }

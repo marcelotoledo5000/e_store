@@ -1,4 +1,15 @@
-# e_store 0.0.9 (Jan 25, 2020)
+# e_store 0.0.10 (Mai 02, 2020)
+
+* Fix pending test
+* Updated docker-compose
+* Updated gems
+* Added `codecov` and `dotenv-rails` gems
+* Removed CodeClimate: `CC_TEST_REPORTER`
+* Added some badges to README.md
+
+  *Marcelo Toledo*
+
+## e_store 0.0.9 (Jan 25, 2020)
 
 * Updated Ruby version
 * Updated Rails version

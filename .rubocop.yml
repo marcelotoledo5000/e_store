@@ -19,7 +19,6 @@ AllCops:
     - 'script/**/*'
     - 'spec/rails_helper.rb'
     - 'spec/spec_helper.rb'
-    - 'vendor/**/*.rb'
     - 'vendor/**/*'
   UseCache: false
   TargetRailsVersion: 6.0
@@ -31,6 +30,15 @@ Metrics/BlockLength:
 Style/ClassAndModuleChildren:
   EnforcedStyle: compact
 
+Style/HashEachMethods:
+  Enabled: true
+
+Style/HashTransformKeys:
+  Enabled: true
+
+Style/HashTransformValues:
+  Enabled: true
+
 Layout/DotPosition:
   EnforcedStyle: trailing
 
@@ -41,7 +49,4 @@ RSpec/ExampleLength:
   Enabled: false
 
 RSpec/MultipleExpectations:
-  Enabled: false
-
-RSpec/NamedSubject:
   Enabled: false

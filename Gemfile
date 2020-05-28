@@ -9,7 +9,7 @@ gem 'bootsnap', '~> 1.4', require: false
 gem 'coffee-rails', '~> 5.0'
 gem 'dotenv-rails', '~> 2.7'
 gem 'jbuilder', '~> 2.9'
-gem 'kaminari', '~> 1.1'
+gem 'kaminari', '~> 1.2'
 gem 'pg', '~> 1.2'
 gem 'puma', '~> 4.3'
 gem 'rack-cors', '~> 1.1'

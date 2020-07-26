@@ -1,4 +1,10 @@
-# e_store 0.0.11 (Mai 03, 2020)
+# e_store 0.0.12 (Jul 26, 2020)
+
+* Bump a lot of gems
+
+  *Marcelo Toledo*
+
+## e_store 0.0.11 (Mai 03, 2020)
 
 * Update README.md
 
